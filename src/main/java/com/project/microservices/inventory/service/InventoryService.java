@@ -1,0 +1,18 @@
+package com.project.microservices.inventory.service;
+
+import com.project.microservices.inventory.repository.InventoryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class InventoryService {
+    private final InventoryRepository inventoryRepository;
+
+    public boolean isInStock(String skuCode , Integer quantity) {
+        // Check if the inventory has enough quantity for the given SKU code
+        return inventoryRepository.existsBySkuCodeAndQuantityIsGreaterThanEqual(skuCode, quantity);
+
+    }
+
+}
